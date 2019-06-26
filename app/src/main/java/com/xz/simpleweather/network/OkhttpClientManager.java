@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -11,24 +14,19 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkhttpClientManager {
-    public void sendRequestWithOkHttp() {
 
+    public static void sendRequestWithOkHttp(final String url, final ResultCallback callback) {
 
         new Thread(new Runnable() {
 
             @Override
 
             public void run() {
-
-
                 try {
-
-
                     //get请求
-
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("https://www.mxnzp.com/api/address/list")
+                            .url(url)
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
@@ -47,10 +45,9 @@ public class OkhttpClientManager {
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     */
-
-                    Logger.d(responseData);
+                    callback.onResponse(responseData);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    callback.onError(e);
                 }
 
             }
@@ -59,5 +56,11 @@ public class OkhttpClientManager {
 
     }
 
+    public static abstract class ResultCallback<T> {
+
+        public abstract void onError(Exception e);
+
+        public abstract void onResponse(String responseData);
+    }
 
 }

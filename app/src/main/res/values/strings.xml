@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimpleWeather</string>
+    <string name="app_name_zh">极简天气</string>
 </resources>
