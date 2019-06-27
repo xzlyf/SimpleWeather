@@ -1,15 +1,16 @@
 package com.xz.simpleweather.ui.MainActivity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ldoublem.loadingviewlib.view.LVEatBeans;
+import com.orhanobut.logger.Logger;
 import com.xz.simpleweather.R;
 import com.xz.simpleweather.base.BaseActivity;
 import com.xz.simpleweather.entity.Local;
@@ -23,8 +24,6 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
 
 public class MainActivity extends BaseActivity implements IView {
 
@@ -49,10 +48,10 @@ public class MainActivity extends BaseActivity implements IView {
     RelativeLayout loginView;
     @BindView(R.id.weather_info)
     RelativeLayout weatherInfo;
+    @BindView(R.id.loading_tips)
+    TextView loading_tips;
 
     private MainPresenter presenter;
-    private boolean isLoginning;//是否显示着加载动画
-
 
     Handler handler = new Handler() {
         @Override
@@ -73,12 +72,19 @@ public class MainActivity extends BaseActivity implements IView {
         ButterKnife.bind(this);
         presenter = new MainPresenter(this);//初始化presenter
         startLoginning();//显示动画
-        presenter.getUserIpFromNet();//获取用户的ip地址可得知用户的网络位置
+        presenter.getUserIpFromNet();
 
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+
+    @Override
     public void sToast(final String msg) {
+
         if (isOnMainThread()) {
             mToast(msg);
         } else {
@@ -97,7 +103,6 @@ public class MainActivity extends BaseActivity implements IView {
     }
 
 
-    @Override
     public void setDataToView(final WeatherData weatherData) {
         handler.post(new Runnable() {
             @Override
@@ -115,11 +120,29 @@ public class MainActivity extends BaseActivity implements IView {
     }
 
     @Override
+    public void showRetryTips() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                loading_tips.setText("点击重试");
+                loading_tips.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDialog("稍等片刻", "L");
+                        presenter.getUserIpFromNet();//重新获取一遍地址
+                        loading_tips.setText("正在重试");
+
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
     public void startLoginning() {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                isLoginning = true;
                 loginAnimation.startAnim(3000);
                 loginView.setVisibility(View.VISIBLE);
                 weatherInfo.setVisibility(View.GONE);
@@ -133,7 +156,6 @@ public class MainActivity extends BaseActivity implements IView {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                isLoginning = false;
                 loginAnimation.stopAnim();
                 loginView.setVisibility(View.GONE);
                 weatherInfo.setVisibility(View.VISIBLE);
@@ -172,4 +194,6 @@ public class MainActivity extends BaseActivity implements IView {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
+
 }

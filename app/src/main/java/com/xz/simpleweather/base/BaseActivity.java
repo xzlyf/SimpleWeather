@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.xz.simpleweather.R;
 
 /**
  * 基类
@@ -29,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         init_Data();
     }
 
+
     Toast mToast;
 
     public abstract int getLayoutResource();
@@ -47,15 +49,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void showDialog(String title, String msg) {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void showDialog(String msg,String type) {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
             mDialog = null;
         }
-        mDialog = new BaseDialog(mContext);
+        mDialog = new BaseDialog(mContext, R.style.base_dialog);//创建Dialog并设置样式主题
         mDialog.create();
-        mDialog.setTitle(title);
         mDialog.setMes(msg);
+        mDialog.setType(type);
         mDialog.setCancelable(true);
         mDialog.show();
 

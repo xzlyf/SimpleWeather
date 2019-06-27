@@ -37,7 +37,9 @@ public class MainPresenter {
         model.getDataFromNet(url, new IModel.OnLoadCompleteListener() {
             @Override
             public void failed(Exception e) {
-                view.sToast("网络连接失败");
+
+                view.sToast("网络异常0x0002");
+                view.showRetryTips();
             }
 
             @Override
@@ -52,6 +54,7 @@ public class MainPresenter {
                         if (obj2 != null) {
                             Gson gson = new Gson();
                             WeatherData weatherData = gson.fromJson(obj2.toString(), WeatherData.class);
+                            Local.isloading = true;//加载完成标识
                             view.setDataToView(weatherData);
                         }
 
@@ -94,8 +97,9 @@ public class MainPresenter {
                             //随机两秒内
                             Random random = new Random();
                             int time = random.nextInt(2000);
-                            Thread.sleep(time);//延迟一下才给结果，让加载动画播放下;
+                            Thread.sleep(time);//延迟一下才给结果，让加载动画播放下，模拟网络慢
                             view.stopLoginning();
+                            view.dismissDialog();
                         }
 
 
@@ -114,7 +118,15 @@ public class MainPresenter {
 
             @Override
             public void failed(Exception e) {
-                view.sToast("网络连接失败");
+                try {
+                    Thread.sleep(1000);//模拟网络慢
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                view.sToast("网络异常0x0001");
+                view.dismissDialog();
+                view.showRetryTips();
+
             }
         });
     }
