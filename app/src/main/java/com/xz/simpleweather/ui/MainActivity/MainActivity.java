@@ -1,26 +1,33 @@
 package com.xz.simpleweather.ui.MainActivity;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ldoublem.loadingviewlib.view.LVEatBeans;
-import com.orhanobut.logger.Logger;
 import com.xz.simpleweather.R;
 import com.xz.simpleweather.base.BaseActivity;
 import com.xz.simpleweather.entity.Local;
 import com.xz.simpleweather.entity.WeatherData;
+import com.xz.simpleweather.ui.DiscoverFragment;
+import com.xz.simpleweather.ui.HomeFragment;
 import com.xz.simpleweather.ui.MainActivity.presenter.MainPresenter;
 import com.xz.simpleweather.ui.MainActivity.view.IView;
+import com.xz.simpleweather.ui.adapter.TitleFragmentPagerAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,8 +80,46 @@ public class MainActivity extends BaseActivity implements IView {
         presenter = new MainPresenter(this);//初始化presenter
         startLoginning();//显示动画
         presenter.getUserIpFromNet();
-
+        initTab();
     }
+
+
+    private void initTab() {
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        TabLayout three_tablayout = findViewById(R.id.tab_layout);
+
+        List<Fragment> fragments = new ArrayList<>();
+        //加入布局
+        fragments.add(new HomeFragment());
+        fragments.add(new DiscoverFragment());
+        fragments.add(new DiscoverFragment());
+
+        String[] titles = new String[]{"首页", "发现", "我的"};
+
+        //设置适配器
+        TitleFragmentPagerAdapter adapter = new TitleFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
+        viewPager.setAdapter(adapter);
+        //绑定
+        three_tablayout.setupWithViewPager(viewPager);
+
+        for (int i = 0; i < three_tablayout.getTabCount(); i++) {
+            TabLayout.Tab tab = three_tablayout.getTabAt(i);
+            Drawable d = null;
+            switch (i) {
+                case 0:
+                    d = getResources().getDrawable(R.drawable.home);
+                    break;
+                case 1:
+                    d = getResources().getDrawable(R.drawable.discovery);
+                    break;
+                case 2:
+                    d = getResources().getDrawable(R.drawable.myself);
+                    break;
+            }
+            tab.setIcon(d);
+        }
+    }
+
 
     @Override
     protected void onDestroy() {

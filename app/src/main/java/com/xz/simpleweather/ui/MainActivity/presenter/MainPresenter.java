@@ -3,20 +3,15 @@ package com.xz.simpleweather.ui.MainActivity.presenter;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.xz.simpleweather.entity.Local;
-import com.xz.simpleweather.entity.National;
 import com.xz.simpleweather.entity.UserNetInfo;
 import com.xz.simpleweather.entity.WeatherData;
-import com.xz.simpleweather.network.OkhttpClientManager;
 import com.xz.simpleweather.ui.MainActivity.MainActivity;
 import com.xz.simpleweather.ui.MainActivity.model.IModel;
 import com.xz.simpleweather.ui.MainActivity.model.MainModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class MainPresenter {
@@ -29,7 +24,6 @@ public class MainPresenter {
     }
 
     /**
-     * 获取api的json数据并赋值给javabean类中
      *
      * @param url
      */

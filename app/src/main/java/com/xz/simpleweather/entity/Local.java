@@ -2,15 +2,19 @@ package com.xz.simpleweather.entity;
 
 public class Local {
     public static String REQUEST_LINK = "https://www.mxnzp.com/";//api头地址
-    public static String REOUEST_IDENTIFY = "api/";//网址的标识
+    public static String REQUEST_IDENTIFY = "api/";//网址的标识
     public static String REQUEST_GET_WEATHER = "weather/current/";//api尾部
-    public static String REQIEST_GET_USER_IP = "ip/self";//api尾部
-    public static String BASE_URL = REQUEST_LINK + REOUEST_IDENTIFY;
+    public static String REQUEST_GET_USER_IP = "ip/self";//api尾部
+    public static String BASE_URL = REQUEST_LINK + REQUEST_IDENTIFY;
     public static String WEATHER_URL = BASE_URL+ REQUEST_GET_WEATHER;
-    public static String GET_USER_IP_URL = BASE_URL+ REQIEST_GET_USER_IP;
+    public static String GET_USER_IP_URL = BASE_URL+ REQUEST_GET_USER_IP;
+
+    public static String REQUEST_GET_FORECAST_WEATHER = "weather/forecast/";//api尾部
+    public static String FORECAST_WEATHER_URL = BASE_URL+REQUEST_GET_FORECAST_WEATHER;
 
     public static boolean isloading = false;//是否加载完成
 
+    public static final String ALL_READY = "com.xz.simpleweather.ALL_READY";
 
     public static class self{
         public static String ip;//访问者的ip地址
