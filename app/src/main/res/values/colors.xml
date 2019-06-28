@@ -13,5 +13,7 @@
     <color name="tab">#FF9800</color>
     <!--透明颜色-->
     <color name="transparent">#00ffffff</color>
+    <color name="wood">#672F26</color>
+    <color name="blue">#9ADFBD</color>
 </resources>
 

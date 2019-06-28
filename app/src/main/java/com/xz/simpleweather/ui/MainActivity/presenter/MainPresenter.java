@@ -92,7 +92,7 @@ public class MainPresenter {
                             Random random = new Random();
                             int time = random.nextInt(2000);
                             Thread.sleep(time);//延迟一下才给结果，让加载动画播放下，模拟网络慢
-                            view.stopLoginning();
+                            view.getWeatherData();
                             view.dismissDialog();
                         }
 

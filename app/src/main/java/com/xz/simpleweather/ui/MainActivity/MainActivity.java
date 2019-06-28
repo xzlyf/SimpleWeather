@@ -80,7 +80,6 @@ public class MainActivity extends BaseActivity implements IView {
         presenter = new MainPresenter(this);//初始化presenter
         startLoginning();//显示动画
         presenter.getUserIpFromNet();
-        initTab();
     }
 
 
@@ -159,6 +158,8 @@ public class MainActivity extends BaseActivity implements IView {
                 windPower.setText(weatherData.getWindPower());
                 humidity.setText(weatherData.getHumidity());
                 reportTime.setText(formatTime(weatherData.getReportTime()));
+                initTab();
+                stopLoginning();
             }
         });
 
@@ -204,14 +205,16 @@ public class MainActivity extends BaseActivity implements IView {
                 loginAnimation.stopAnim();
                 loginView.setVisibility(View.GONE);
                 weatherInfo.setVisibility(View.VISIBLE);
-                //执行查询天气
-                presenter.getWeatherDataFromNet(
-                        Local.WEATHER_URL + Local.self.city);
+
             }
         });
 
     }
-
+    public void getWeatherData(){
+        //执行查询天气
+        presenter.getWeatherDataFromNet(
+                Local.WEATHER_URL + Local.self.city);
+    }
     /**
      * 格式化日期
      *
