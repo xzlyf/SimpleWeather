@@ -63,8 +63,6 @@ public class HomeFragment extends BaseFragment {
         model = new MainModel();
         findID();
         startAnim();
-//        startWaitOrder();
-        init_recycler();
         requestForNet();
 
     }
@@ -74,28 +72,10 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    /**
-     * 等待指令，每个一秒刷新一次标识
-     */
-    private void startWaitOrder() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //循环n次后提示用户
-                    for (int i = 0; i < 30; i++) {
-                        Thread.sleep(1000);
-                        if (Local.isloading) {
-                            requestForNet();
-                            break;
-                        }
-                    }
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     /**

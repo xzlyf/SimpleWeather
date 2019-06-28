@@ -58,7 +58,7 @@ public class ForecastWeatherAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((ViewHolder)holder).forecast_dayWindDirection.setText(weatherForecastData.getData().getForecasts().get(position-1).getDayWindDirection());
             ((ViewHolder)holder).forecast_nightWeather.setText(weatherForecastData.getData().getForecasts().get(position-1).getNightWeather());
             ((ViewHolder)holder).forecast_nightTemp.setText(weatherForecastData.getData().getForecasts().get(position-1).getNightTemp());
-            ((ViewHolder)holder).forecast_nightWindPower.setText(weatherForecastData.getData().getForecasts().get(position-1).getNightWindPower());
+            ((ViewHolder)holder).forecast_nightWindPower.setText(weatherForecastData.getData().getForecasts().get(position-1).getNightWindDirection());
 
         }
          }

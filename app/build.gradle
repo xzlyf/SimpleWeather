@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.ldoublem.loadingview:loadingviewlib:1.0'
     //好看的加载动画
     implementation 'com.android.support:design:27.1.1'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 }
