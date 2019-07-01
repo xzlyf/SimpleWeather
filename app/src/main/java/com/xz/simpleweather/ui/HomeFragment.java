@@ -64,13 +64,9 @@ public class HomeFragment extends BaseFragment {
         findID();
         startAnim();
         requestForNet();
-
     }
 
 
-    private void init_recycler() {
-
-    }
 
 
     @Override
@@ -168,4 +164,5 @@ public class HomeFragment extends BaseFragment {
         });
 
     }
+
 }

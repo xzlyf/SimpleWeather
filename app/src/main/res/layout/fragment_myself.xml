@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+    <!--<Button-->
+    <!--android:layout_margin="15dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:textSize="18sp"-->
+    <!--android:textColor="@color/wood"-->
+    <!--android:background="@drawable/select_btn_color"-->
+    <!--android:stateListAnimator="@drawable/select_elevation"-->
+    <!--android:text="检查更新"/>-->
+    <Button
+        android:id="@+id/check_update_btn"
+        style="@style/mybutton"
+        android:text="检查更新" />
+
+    <Button
+        android:id="@+id/family_btn"
+        style="@style/mybutton"
+        android:text="家族软件" />
+
+</LinearLayout>

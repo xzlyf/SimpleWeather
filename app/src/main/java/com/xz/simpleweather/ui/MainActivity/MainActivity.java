@@ -1,6 +1,5 @@
 package com.xz.simpleweather.ui.MainActivity;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,15 +12,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ldoublem.loadingviewlib.view.LVEatBeans;
+import com.orhanobut.logger.Logger;
 import com.xz.simpleweather.R;
 import com.xz.simpleweather.base.BaseActivity;
 import com.xz.simpleweather.entity.Local;
 import com.xz.simpleweather.entity.WeatherData;
+import com.xz.simpleweather.sql.Album;
 import com.xz.simpleweather.ui.DiscoverFragment;
 import com.xz.simpleweather.ui.HomeFragment;
 import com.xz.simpleweather.ui.MainActivity.presenter.MainPresenter;
 import com.xz.simpleweather.ui.MainActivity.view.IView;
+import com.xz.simpleweather.ui.MyselfFragment;
 import com.xz.simpleweather.ui.adapter.TitleFragmentPagerAdapter;
+
+import org.litepal.LitePal;
+import org.litepal.crud.DataSupport;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,6 +64,7 @@ public class MainActivity extends BaseActivity implements IView {
     TextView loading_tips;
 
     private MainPresenter presenter;
+    private Album last_album;
 
     Handler handler = new Handler() {
         @Override
@@ -80,6 +86,14 @@ public class MainActivity extends BaseActivity implements IView {
         presenter = new MainPresenter(this);//初始化presenter
         startLoginning();//显示动画
         presenter.getUserIpFromNet();
+        LitePal.initialize(this);//初始化litepal
+        LitePal.getDatabase();//如果没有表则创建一张表
+        Album last_album = DataSupport.findLast(Album.class);//查找表的最后一条数据
+        if (last_album!=null){
+            Local.self.last_clock_number=last_album.getClock_number();
+            Local.self.isClockToday = last_album.isClock();
+            Local.self.clock_time = last_album.getClock_time();
+        }
     }
 
 
@@ -89,15 +103,16 @@ public class MainActivity extends BaseActivity implements IView {
 
         List<Fragment> fragments = new ArrayList<>();
         //加入布局
+        fragments.add(new DiscoverFragment());
         fragments.add(new HomeFragment());
-        fragments.add(new DiscoverFragment());
-        fragments.add(new DiscoverFragment());
+        fragments.add(new MyselfFragment());
 
-        String[] titles = new String[]{"首页", "发现", "我的"};
+        String[] titles = new String[]{"发现", "主页", "我的"};
 
         //设置适配器
         TitleFragmentPagerAdapter adapter = new TitleFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1);//设定默认页
         //绑定
         three_tablayout.setupWithViewPager(viewPager);
 
