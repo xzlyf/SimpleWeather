@@ -40,7 +40,6 @@ public class HomeFragment extends BaseFragment {
     private RecyclerView forecastRecycler;
     private LVBlazeWood lvBlazeWood;
     private RelativeLayout relativeLayout;
-    private MainModel model;
     private RecyclerView mRecycler;
     private ForecastWeatherAdapter adapter;
 
@@ -60,7 +59,6 @@ public class HomeFragment extends BaseFragment {
     protected void init_data() {
         view = getView();
         context = getContext();
-        model = new MainModel();
         findID();
         startAnim();
         requestForNet();

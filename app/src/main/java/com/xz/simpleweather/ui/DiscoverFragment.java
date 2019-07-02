@@ -38,7 +38,6 @@ public class DiscoverFragment extends BaseFragment {
     private TextView clock_date;
     private TextView clock_tips;
     private Context context;
-    private MainModel model;
     private final static int HIDE_UI = 100;
     private final static int HIDE_CLOCK = 101;
 
@@ -79,11 +78,9 @@ public class DiscoverFragment extends BaseFragment {
     protected void init_data() {
         findID();
         init_listeners();
-        model = new MainModel();
         //判断是否第二天要重新打开
         String lcoaltime = TimeCycle.string2date(1561859548);
         String cloudtime = TimeCycle.string2date(System.currentTimeMillis());
-        Logger.d(lcoaltime+TimeCycle.IsYesterday(lcoaltime));
         if (!TimeCycle.IsYesterday(lcoaltime)) {
             clock_date.setText("已打卡" + (Local.self.last_clock_number ) + "天");
             clock_date.setVisibility(View.VISIBLE);

@@ -2,6 +2,7 @@ package com.xz.simpleweather.ui.MainActivity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.ldoublem.loadingviewlib.view.LVEatBeans;
 import com.orhanobut.logger.Logger;
 import com.xz.simpleweather.R;
@@ -94,6 +96,11 @@ public class MainActivity extends BaseActivity implements IView {
             Local.self.isClockToday = last_album.isClock();
             Local.self.clock_time = last_album.getClock_time();
         }
+
+        //获取本地一些数据
+        Local.localVersionName = AppUtils.getAppVersionName();
+        Local.localVersionCode = AppUtils.getAppVersionCode();
+        Local.DEFAULT_DOWNLOAD_PATH = getExternalCacheDir().getAbsolutePath()+"/apk";
     }
 
 

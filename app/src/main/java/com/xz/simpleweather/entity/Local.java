@@ -1,6 +1,7 @@
 package com.xz.simpleweather.entity;
 
 public class Local {
+    public static String MY_WEB = "http://www.xzlyf.club/";
     public static String REQUEST_LINK = "https://www.mxnzp.com/";//api头地址
     public static String REQUEST_IDENTIFY = "api/";//网址的标识
     public static String REQUEST_GET_WEATHER = "weather/current/";//api尾部
@@ -8,7 +9,7 @@ public class Local {
     public static String BASE_URL = REQUEST_LINK + REQUEST_IDENTIFY;
     public static String WEATHER_URL = BASE_URL+ REQUEST_GET_WEATHER;
     public static String GET_USER_IP_URL = BASE_URL+ REQUEST_GET_USER_IP;
-
+    public static String UPDATE_URL="http://www.xzlyf.club/SimpleWeather/update.json";//检查更新服务器地址
     public static String REQUEST_GET_FORECAST_WEATHER = "weather/forecast/";//api尾部
     public static String FORECAST_WEATHER_URL = BASE_URL+REQUEST_GET_FORECAST_WEATHER;
     public static String GET_NET_TIME_URL ="http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";//网络时间戳api
@@ -17,6 +18,10 @@ public class Local {
     public static final String clockToday = "ClockToday";
     public static long netTime ;//网络时间戳
     public static final String ALL_READY = "com.xz.simpleweather.ALL_READY";
+
+    public static String localVersionName;//本地软件版本号
+    public static int localVersionCode;//本地软件版本码
+    public static String DEFAULT_DOWNLOAD_PATH = ""; //默认下载地址
 
     public static class self{
         public static String ip;//访问者的ip地址

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="新版本提醒"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_title"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="v0.2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="更新内容："
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/msg_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="9"
+                    android:text="1.测试测试
+2.测试大大是
+3.测试大苏打撒旦大苏打撒旦
+4.打实大苏打的
+5.测试测试撒旦撒大苏打
+2.测试大大是
+3.测试大苏打撒旦大苏打撒旦
+4.打实大苏打的
+5.测试测试撒旦撒大苏打
+3.测试大苏打撒旦大苏打撒旦
+4.打实大苏打的
+5.测试测试撒旦撒大苏打
+2.测试大大是
+3.测试大苏打撒旦大苏打撒旦
+4.打实大苏打的
+5.测试测试撒旦撒大苏打" />
+            </ScrollView>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/update_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerInParent="true"
+            android:layout_above="@+id/download_git"
+            android:layout_marginBottom="10dp"/>
+
+        <com.ldoublem.loadingviewlib.view.LVBlock
+            android:id="@+id/download_git"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/download_progress"
+            android:layout_centerInParent="true" />
+
+        <com.ldoublem.loadingviewlib.LVLineWithText
+            android:id="@+id/download_progress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@+id/layout_bottom_btn"
+            android:background="@color/wood" />
+
+        <LinearLayout
+            android:id="@+id/layout_bottom_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/cancel_update"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/select_update_btn"
+                android:text="让我想想"
+                android:textColor="@color/wood" />
+
+            <Button
+                android:id="@+id/download_update"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/select_update_btn"
+                android:text="立即更新"
+                android:textColor="@color/wood" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
