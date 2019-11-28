@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.AppUtils;
 import com.ldoublem.loadingviewlib.view.LVEatBeans;
 import com.orhanobut.logger.Logger;
+import com.xz.com.log.LogUtil;
 import com.xz.simpleweather.R;
 import com.xz.simpleweather.base.BaseActivity;
 import com.xz.simpleweather.entity.Local;
@@ -88,15 +89,15 @@ public class MainActivity extends BaseActivity implements IView {
         presenter = new MainPresenter(this);//初始化presenter
         startLoginning();//显示动画
         presenter.getUserIpFromNet();
-        LitePal.initialize(this);//初始化litepal
-        LitePal.getDatabase();//如果没有表则创建一张表
-        Album last_album = DataSupport.findLast(Album.class);//查找表的最后一条数据
-        if (last_album!=null){
-            Local.self.last_clock_number=last_album.getClock_number();
-            Local.self.isClockToday = last_album.isClock();
-            Local.self.clock_time = last_album.getClock_time();
-        }
-
+//        LitePal.initialize(this);//初始化litepal
+//        LitePal.getDatabase();//如果没有表则创建一张表
+//        Album last_album = DataSupport.findLast(Album.class);//查找表的最后一条数据
+//        if (last_album!=null){
+//            Local.self.last_clock_number=last_album.getClock_number();
+//            Local.self.isClockToday = last_album.isClock();
+//            Local.self.clock_time = last_album.getClock_time();
+//        }
+        LogUtil.d("sadsa");
         //获取本地一些数据
         Local.localVersionName = AppUtils.getAppVersionName();
         Local.localVersionCode = AppUtils.getAppVersionCode();

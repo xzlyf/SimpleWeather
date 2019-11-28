@@ -93,7 +93,6 @@ public class HomeFragment extends BaseFragment {
                         int time = random.nextInt(2000);
                         Thread.sleep(time);//延迟一下才给结果，让加载动画播放下，模拟网络慢
                         setWeatherForecastData(weatherForecastData);
-
                     } else if (obj.getString("code").equals("0")) {
 //                        view.sToast("解析失败：" + obj.getString("msg"));
                     }
@@ -162,5 +161,6 @@ public class HomeFragment extends BaseFragment {
         });
 
     }
+
 
 }

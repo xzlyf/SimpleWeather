@@ -24,7 +24,6 @@ public class MainPresenter {
     }
 
     /**
-     *
      * @param url
      */
     public void getWeatherDataFromNet(String url) {
@@ -65,6 +64,7 @@ public class MainPresenter {
         });
     }
 
+
     /**
      * 获取用户网络位置 IP  服务商信息
      */
@@ -81,13 +81,13 @@ public class MainPresenter {
                         JSONObject obj2 = obj.getJSONObject("data");
                         if (obj2 != null) {
                             Gson gson = new Gson();
-                            UserNetInfo info = gson.fromJson(obj2.toString(),UserNetInfo.class);
+                            UserNetInfo info = gson.fromJson(obj2.toString(), UserNetInfo.class);
                             //赋值给全局变量
                             Local.self.city = info.getCity();
                             Local.self.ip = info.getIp();
                             Local.self.isp = info.getIsp();
                             Local.self.province = info.getProvince();
-
+                            getNetTime();//获取网络时间戳
                             //随机两秒内
                             Random random = new Random();
                             int time = random.nextInt(2000);
@@ -125,5 +125,35 @@ public class MainPresenter {
         });
     }
 
+    /**
+     * 获取时间戳
+     */
+    public void getNetTime() {
+        model.getDataFromNet(Local.GET_NET_TIME_URL, new IModel.OnLoadCompleteListener() {
+            @Override
+            public void success(String data) {
+                JSONObject obj = null;
+                try {
+                    Logger.w("网络时间戳" + data);
+                    obj = new JSONObject(data);
+                    if (obj.getJSONObject("data") != null) {
+                        JSONObject obj2 = obj.getJSONObject("data");
+                        //保存网络时间戳
+                        Local.netTime = obj2.getLong("t");
+                    } else {
+                    }
+
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void failed(Exception e) {
+            }
+        });
+
+    }
 
 }
